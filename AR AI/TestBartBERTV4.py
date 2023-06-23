@@ -1,6 +1,7 @@
 import json
 import os
 import webbrowser
+import timeit
 from outputDataFunctions import *
 from transformers import pipeline
 
@@ -48,7 +49,7 @@ def getQAOutput(nlp, question, context):
 while True:
     print("Ask a Query on Aplications, Entry requirenments or alternate paths to Trinity")
     query = input('>')
-
+    start = timeit.default_timer()
     print("---------------label output layer 1--------")
     print("----------------BERT output----------------")
     sheetValues = {}
@@ -67,5 +68,8 @@ while True:
             highestSheetVal = value
             highestSheetAnswer = name
     print(highestSheetAnswer)
+
+    stop = timeit.default_timer()
+    print("Time taken" + stop-start)
 
     print("-------------------------------------------")
