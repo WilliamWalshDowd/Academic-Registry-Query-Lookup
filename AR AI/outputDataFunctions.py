@@ -41,3 +41,10 @@ def compileSheetsToList(dataVal):
         for sheet in value:
             justSheets.append(sheet)
     return justSheets
+
+def compileSheetContentToList(dataVal):
+    fullSheet = ""
+    for catagory, value in dataVal.items():
+        for sheet in value:
+            fullSheet += (sheet['Content'] + "\n\n")
+    return fullSheet
