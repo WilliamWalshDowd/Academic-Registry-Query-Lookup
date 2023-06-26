@@ -1,3 +1,4 @@
+#All in one BERT QA model value comparison
 import json
 import os
 import webbrowser
@@ -12,11 +13,11 @@ data = json.load(file)
 #---------------Label loader--------------------------
 print("---------------loading data-------------------")
 compiledContent = compileSheetContentToList(data)
-print(compiledContent)
-print("----------------------------------------------") 
+printDataTitle(data)
+print("----------------------------------------------")
 
 #---------------Model Loader-------------------------
-model_name = "deepset/bert-large-uncased-whole-word-masking-squad2"
+model_name = "deepset/tinyroberta-squad2"
 nlp = pipeline('question-answering', model=model_name, tokenizer=model_name)
 
 #---------------Roberta QA model------------------
@@ -35,10 +36,16 @@ while True:
     start = timeit.default_timer()
     print("----------------BERT output----------------")
     modelOutput = getQAOutput(nlp, query, compiledContent)
-    print(modelOutput)
+    print("Answer: " + modelOutput['answer'])
+    print("Score: " + str(modelOutput['score']))
 
-    print("---------------sentence output-------------")
+    print("---------------Sentence output-------------")
     print(getSentenceFromQuote(modelOutput['answer'], compiledContent))
     stop = timeit.default_timer()
-    print("Time taken" + stop-start)
+    print("Time-taken: " + str(stop-start))
+
+    print("----------------Label output---------------")
+    label = findLabelFromQuote(modelOutput['answer'], data)
+    print(label)
+
     print("-------------------------------------------")
