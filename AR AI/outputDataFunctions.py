@@ -1,3 +1,4 @@
+import re
 #-------------------------------------------Data & Output lookup---------------------------------------------
 def getOutput(title, dataVal, labels):
     for catagory, value in dataVal.items():
@@ -89,3 +90,8 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
     # Print New Line on Complete
     if iteration == total: 
         print()
+
+def escapeString(string):
+    step1 = re.sub('\s+',' ', string)
+    step2 = re.sub('\"','\\"', step1)
+    return step2

@@ -1,0 +1,222 @@
+{
+    "Student Annual Registration": [
+        {
+            "Title": "How do I complete registration?",
+            "Content": "Students will receive an in-tray message to their my.tcd.ie portal, advising them that registration is open. The student should then click on the \u201cRegister\u201d tab in the left hand corner of their portal and complete all of the tasks shown. As each task is completed the red X beside the task will turn to a green tick. When all tasks have been completed the student will then be fully registered, and will be prompted to print a \u201cConfirmation of Registration\u201d document. This document should be presented at the dedicated ID Card Issue Desk or the Academic Registry Service Desk (in the case of March new entrants) to obtain a new student ID card. Please note that the payment of fees on the my.tcd.ie portal does not constitute registration. Students must complete the registration process via the my.tcd.ie portal every year."
+        },
+        {
+            "Title": "I am having difficulties registering. Who should I contact?",
+            "Content": "Students who have any difficulty in completing the online registration process should call to the Academic Registry for assistance, or may submit an enquiry with the subject title \u2018Registration Query\u2019 via email (academic.registry@tcd.ie) or by clicking the ASK AR button on the registration screen. "
+        },
+        {
+            "Title": "Where can I get a Trinity Student ID card? How much does it cost?",
+            "Content": "To apply for a student ID card, or TCard you must first complete registration. You can apply for your card on the TCard website. The Trinity student ID card is free, but a replacement card costs \u20ac20 and can be purchased at the Academic Registry service desk in the Watts Building."
+        },
+        {
+            "Title": "I sat supplemental exams and I have not been invited to register.",
+            "Content": "A passing grade is required to be uploaded to a student\u2019s record before the student can be invited to register. Therefore, students who sit supplemental exams will be invited to register at a later stage than students who passed the annual exams. Invitations to register are usually issued towards the end of September for students who have taken supplemental exams and received a passing grade."
+        },
+        {
+            "Title": "I spent the last academic year on an exchange programme and I have not been invited to register.",
+            "Content": "Students who were on ERASMUS exchanges or visiting other institutions the previous year will be invited to register subject to the publication of a result for that academic year. Such students awaiting the publication of results should contact their School or Course Office in the first instance."
+        }
+    ],
+    "General Undergraduate Admissions ": [
+        {
+            "Title": "How do I apply?",
+            "Content": "Information on how to apply can be found on the Study at Trinity website. Students should determine whether they are EU or non-EU and follow the application procedure based on their status. EU or non-EU status does not refer to your citizenship but refers to your residency. Application routes differ depending on your status. "
+        },
+        {
+            "Title": "Am I an EU or non-EU applicant - how is this determined?",
+            "Content": "Guidelines for determining EU/non-EU status can be found under the 'Personal Fee Status' tab on our Undergraduate Fees and Finances page. "
+        },
+        {
+            "Title": "HEA Free Fees Scheme - do I qualify and what documentation do I need?",
+            "Content": "In order to qualify for the Irish Free Fees Initiative you must have been living in the EU for at least 3 of the 5 years before starting your course."
+        },
+        {
+            "Title": "What are the course fees and am I eligible for any assistance?",
+            "Content": "Information on course fees and college funding, for both EU and non-EU students can be found on the Student Finances page."
+        },
+        {
+            "Title": "How do I apply as an EU Visiting Student?",
+            "Content": "Information on eligibility as well as application forms for EU Visiting Students can be downloaded from our Erasmus & EU Exchange page."
+        },
+        {
+            "Title": "When is the deadline for receipt of applications?",
+            "Content": "The closing date is the 1st March for entry the following September. "
+        },
+        {
+            "Title": "How much will it cost to study at Trinity as an EU Visiting student?",
+            "Content": "EU Students who are spending a year at Trinity as an integral part of their degree abroad are eligible for a fee remission and will only be required to pay the Student Contribution. In addition students are required to pay the Union of Students in Ireland (USI) membership levy and the Student Sports Centre charge, but will not be liable for tuition fees if approved for the Free Fees scheme."
+        },
+        {
+            "Title": "Are there English Language proficiency entry requirements?",
+            "Content": "A high level of competence in the English language is required to study at Trinity College Dublin. A list of our English language requirements can be found at our Entry Requirements for International Students page."
+        },
+        {
+            "Title": "I will not have the opportunity to take an English Language Proficiency test before the 1st of March. Is it possible for me to send the results after the closing date?",
+            "Content": "Yes. Results can be sent after the application, and provisional offers can be made without them."
+        },
+        {
+            "Title": "Can I take modules in more than one department while at Trinity?",
+            "Content": "Yes. It is usual for Visiting Students to take modules in two or three departments and sometimes four."
+        },
+        {
+            "Title": "How do I enroll for modules at Trinity?",
+            "Content": "You can discuss module choices with your department upon arrival at Trinity College Dublin. Students will not be accepted into specific modules prior to arrival unless they have listed as \"required\" on their application form, and have been accepted into that department. "
+        },
+        {
+            "Title": "Does acceptance into a particular department mean I can take whatever modules I wish?",
+            "Content": "If you have been accepted into a particular department, for which you have listed modules as \u201crequired\u201d, then yes, you will be guaranteed a place in these modules. However, acceptance into various departments means you will be offered modules on arrival following discussion with the appropriate lecturers. You may not be offered all of the modules you wish to take."
+        },
+        {
+            "Title": "Where can I get information on modules available to me?",
+            "Content": "For visiting students, you can find more information on our visiting student module enrolment page."
+        },
+        {
+            "Title": "Can I apply to the Semester Start-Up Programme (SSP)?",
+            "Content": "At present the Semester Start-Up Programme is only available to non-EU Visiting Students."
+        }
+    ],
+    "CAO Application": [
+        {
+            "Title": "I have the points but I did not get an offer?",
+            "Content": "Points are not the only criteria that determine whether an offer can be made. Applicants are advised to check that they have met the minimum entry requirements or course specific requirements for the course they have not received an offer for. Some common reasons for not receiving an offer are listed below: An applicant\u2019s results do not include English, Mathematics or a language OR they do not satisfy the course requirements. Applicants from other EU countries must satisfy the English Language qualification outlined on the Admission Requirements page under the 'English Language Requirements' tab. The course(s) for which the applicant applied has an interview/test e.g. Drama, Music, Adelaide (TR093), Medicine (HPAT-Ireland). If the applicant did not pass their interview they will be ineligible to receive an offer. The applicant has not provided their final results. The CAO automatically receives the Leaving Certificate and most A Level results. Applicants who are presenting other examinations (e.g. French Baccalaureate, German Abitur etc.) must submit a certified copy of their results to the CAO. Information on how to apply as a Mature Student can be found on the 'How to Apply' page on the Mature Students webpage. "
+        },
+        {
+            "Title": "My results were not available on time for Round One and I have the points for the course \u2013 will I definitely get an offer in Round Two?",
+            "Content": "If the results were not submitted by the applicant in time and there are places available after Round One, an offer will be issued. However, if a course is oversubscribed the university may not be in a position to automatically offer a place and the applicant may have to wait until there is a vacancy."
+        },
+        {
+            "Title": "There was a mistake in my Leaving Certificate results and I now have the points for the course.",
+            "Content": "Any amendments to Leaving Certificate results will be notified to the Academic Registry by the CAO. We cannot act until we receive the formal notification from the CAO. As soon as the result is received we will re-assess the application and make an offer in the next round if a place is available. If not, a deferred place for the following year may be offered at the discretion of the Admissions Officer. "
+        },
+        {
+            "Title": "I got my 4th course choice on my CAO \u2013 what are the chances of getting a higher offer in the next round?",
+            "Content": "Offers will only be made in subsequent rounds if places are still available. "
+        },
+        {
+            "Title": "I am planning to get my results rechecked. If I have enough points after the re-check, am I guaranteed a place on my chosen course?",
+            "Content": "If, as a result of the re-check process, an applicant receives an upgrade which brings their results to the points required for a course, we will do everything we can to offer a place. However, the results of the re-check process are not issued until early October at which time most courses are full and sometimes it may not be possible to accommodate additional students. In this case, the student will be offered a deferred place for the following year."
+        },
+        {
+            "Title": "I want to defer my place. What do I have to do?",
+            "Content": "Applicants who have received an offer from the CAO may apply to defer their entry. On receipt of the offer the applicant must do two things:"
+        },
+        {
+            "Title": "What is Random Selection?",
+            "Content": "If you look at the list of minimum entry levels you will notice that some points scores have an * beside them. This means that not all students on that points\u2019 level were offered a place. To allow offers to be made fairly to students with the same number of points, a random number is generated when the points are being calculated and this ranks students in order. Random numbers range from 001 to 999."
+        },
+        {
+            "Title": "I got my first choice but I really want my second choice can I change?",
+            "Content": "No, it is unfortunately not possible to move down your list of course choices."
+        },
+        {
+            "Title": "Can I change courses once I register at Trinity College Dublin",
+            "Content": "It is possible to apply for an internal transfer. However, students must have the points and other requirements for the course into which they wish to transfer \u2013 transfer cannot be used as a \u201cback door\u201d into a course. Transfer is also subject to there being places available and therefore cannot be guaranteed. "
+        },
+        {
+            "Title": "CAO Deadlines",
+            "Content": "It is very important to be aware that CAO deadlines are absolute. If an applicant misses a deadline for accepting a place then they will have to write to the Admissions Officer outlining the reasons for not accepting on time. It may not be possible to automatically re-instate the place \u2013 it will depend on whether or not a course is full. Where it is possible to re-instate the place the student will not receive another offer. TCD will request CAO to record a late acceptance for the student."
+        }
+    ],
+    "General Postgraduate Admissions": [
+        {
+            "Title": "How do I apply for a Postgraduate Course?",
+            "Content": "Details and application instructions on all of our postgraduate programmes can be found here. "
+        },
+        {
+            "Title": "What is the closing date for programmes?",
+            "Content": "Closing dates vary for taught programmes, for more information please see our online prospectus and consult the individual course entry or contact the relevant department. Applications for research programmes can be made at any time. However, there are only two registration periods (September and March). Applicants are advised to apply as early as possible prior to their chosen registration period as supervisory capacity may be limited."
+        },
+        {
+            "Title": "I don\u2019t have the results of my final exams, can I still make an application?",
+            "Content": "Yes. Please complete the application form and upload your earlier years transcripts as part of the process. Then, when you receive your final year transcripts, you can upload them to complete your file. You may be made a conditional offer pending your final year results so apply early and make sure to include as many of your available transcripts as possible."
+        },
+        {
+            "Title": "Is there an English language requirement for entry into Postgraduate Courses?",
+            "Content": "All applicants whose first language is not English and who have not been educated through the medium of English must present one of the following qualifications in the English language:"
+        },
+        {
+            "Title": "How do I apply for a PhD or Masters by research?",
+            "Content": "To apply for a research position you must first contact whichever School or Department is suitable for your research from the list of Schools on the TCD website. Each School and Department has a list of Academic staff members and a brief synopsis of their research area. If you find an appropriate supervisor online please email them directly. The email should outline what research you are looking to undertake, a rough research proposal and a brief outline of your academic or relevant employment history. If you cannot find an appropriate supervisor via this method, please email the Director of Teaching and Learning: Postgraduate (DTLPG) of whichever School your research falls under with a similar email and they will hopefully be able to help you find a supervisor. Once you have a supervisor who is willing to supervise you then as per new regulations ALL applications to the Research register must be made online via tcd.ie/courses. The online application fee is \u20ac50. This payment should be made online following the instructions on the website."
+        },
+        {
+            "Title": "How do I apply for the Postgraduate Studentship Award / Ussher Award? Can you tell me about other postgraduate awards/funding?",
+            "Content": " If you are just about to make an application for full-time PhD research here at TCD then you can apply for either of these awards by selecting them from the drop down menu in the Section of the Application Form marked \"Financials/Funding\". Please note the closing date for these awards is the 1st of May annually. This closing date covers entrants for the following September and March start dates. The Postgraduate Studentship Awards are decided at a School level by a committee chaired by the DTLPG and results are announced at the end of July/start of August annually. The awards are generally for 3 academic years only, cover the recipients annual tuition fees (both EU / Non-EU) and provide a stipend of \u20ac6,500. This amount may be subject to change. The Ussher Awards are also for 3 academic years, cover the recipients annual tuition fees (both EU / Non-EU) and provide a stipend of \u20ac13,000.This amount may be subject to change. The Ussher Awards are decided at a Faculty level by a committee chaired by the Faculty Dean from nominations provided by the DTLPG from the Schools within that Faculty. If the applicant has already made an application online then there is no method on the system to allow them to retrospectively apply for the awards. The applicant will need to contact their supervisor to request that their application is passed onto the DTLPG for consideration for the awards."
+        }
+    ],
+    "Fees & Payments": [
+        {
+            "Title": "Fees & Payments",
+            "Content": "For in depth information and frequently asked queries on student finance please visit our webpage here. "
+        }
+    ],
+    "Examinations & Assessment": [
+        {
+            "Title": "When will semester exam timetables be published?",
+            "Content": " An email will be circulated to all students advising when the annual examination timetables are available. Exam timetables are also available on the my.tcd.ie portal and on the Exams page of the Academic Registry website. "
+        },
+        {
+            "Title": "I need to book a flight for the end of May \u2013 can you tell me approximately when my exams will be?",
+            "Content": "Unfortunately, no. Students should ensure that they are available for examinations for the duration of the relevant examination session as stated in the University Almanack of important dates."
+        },
+        {
+            "Title": "I am registered with the Disability Service \u2013 how do I find out my examination timetable details?",
+            "Content": "All students will receive an email from the Academic Registry advising when the timetables are available. You should check the timetables for the dates and start times of your examinations. Separate timetables will be published on the Academic Registry website with specific timetable details, to include your revised location and end time, where required. The Disability Office will send an e-mail advising that the timetables are available."
+        },
+        {
+            "Title": "Do I need to register or pay a fee for the Supplemental Examinations?",
+            "Content": "No, you do not need to register or pay a fee for the Supplemental Examinations. Your School or Course Office will forward the details to the Examinations Team at the Academic Registry. "
+        },
+        {
+            "Title": "I have to sit Special Examinations. What do I need to do?",
+            "Content": "If you have been granted permission to sit a Special Examination you will receive your timetable details directly from your College Tutor. In all cases, a Special Examination fee is payable. Your Tutor will advise you of the current examination fee. The fee must be paid via the my.tcd.ie portal before you sit your Special Examinations."
+        },
+        {
+            "Title": "I am currently off-books with permission to sit examinations at the next annual examination session. Do I need to register for my examinations?",
+            "Content": "Students with permission from the Senior Lecturer to go off books for an academic year and sit examinations in that year must pay an examination fee of \u20ac382. This fee will be raised in advance of the examination \u2013 you will not be prevented from sitting the examination if this fee has not yet been paid however you will not be able to receive your results until this is processed. Off-books students with permission to take examinations are advised to consult with their school, department or course office before the end of Michaelmas term to confirm their examination and/or assessment requirements while off-books."
+        },
+        {
+            "Title": "Where can I find information on the Foundation Scholarship process?",
+            "Content": "All information pertaining to the Foundation Scholarship process is available here. "
+        },
+        {
+            "Title": "When will my annual examination results be published?",
+            "Content": "Annual Examination results will be published during May and June. Your results are published to the my.tcd.ie portal by your course office, please contact them for specific dates."
+        },
+        {
+            "Title": "I was awarded the (XXX) prize this year. When will I receive my cheque?",
+            "Content": "Monetary prizes are paid directly into a student\u2019s bank account. Please ensure that the Capture Bank Details option in your my.tcd.ie portal has been completed. This will allow the Academic Registry to facilitate payment of the prize as soon as possible. "
+        }
+    ],
+    "Graduation": [
+        {
+            "Title": "Graduation",
+            "Content": "For in depth information and frequently asked queries on graduation please visit our webpage here."
+        }
+    ],
+    "Miscellaneous": [
+        {
+            "Title": "Where can I get a Graduate Reader\u2019s pass to the Trinity College Dublin Library?",
+            "Content": "Graduates can apply online for a Graduate Reader\u2019s pass here: www.tcd.ie/library/selfreg/sr1atcdg1.php"
+        },
+        {
+            "Title": "Where can I get a staff card?",
+            "Content": " Staff cards are available from Human Resources."
+        },
+        {
+            "Title": "Where can I apply for a Student travel card/leap card?",
+            "Content": "Travel cards are available from the Students\u2019 Union Office located in House 6 opposite the Students\u2019 Union shop on left hand side after the main archway on to campus. Postgraduate students should contact the Graduate Students\u2019 Union in the first instance."
+        },
+        {
+            "Title": "Where can I request a letter showing I am registered student of the college/confirming my address?",
+            "Content": "Letters confirming a student\u2019s address or registration status can be generated by the student though their my.tcd.ie portal through the \"Register\" tab. These documents can also be directly requested from the Academic Registry and take approximately one working day to issue. Please note during registration and other busy periods there may be short delays in the issuing of letters."
+        },
+        {
+            "Title": "Where can I request a transcript?",
+            "Content": "The Academic Registry issues transcripts for specific courses. A list of these courses can be found at https://www.tcd.ie/academicregistry/service-desk/transcripts/."
+        }
+    ]
+}
