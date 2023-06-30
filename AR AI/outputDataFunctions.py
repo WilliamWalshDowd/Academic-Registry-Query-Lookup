@@ -28,6 +28,13 @@ def makeTitleList(dataVal):
             justSheetLabels.append(sheet['Title'])
     return justSheetLabels
 
+def makeLabeledTitleList(dataVal):
+    justSheetLabels = []
+    for catagory, value in dataVal.items():
+        for sheet in value:
+            justSheetLabels.append(catagory + ": " + sheet['Title'])
+    return justSheetLabels
+
 def getHTMLOutput(title, dataVal, labels):
     for catagory, value in dataVal.items():
         for sheet in value:

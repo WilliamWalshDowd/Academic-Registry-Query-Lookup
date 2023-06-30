@@ -19,8 +19,7 @@ printDataTitle(data)
 print("----------------------------------------------") 
 
 #---------------Model Loader-------------------------
-model_name = "deepset/deberta-v3-large-squad2"
-#monologg/koelectra-small-v2-distilled-korquad-384
+model_name = "deepset/bert-large-uncased-whole-word-masking-squad2"
 nlp = pipeline('question-answering', model=model_name, tokenizer=model_name)
 
 #---------------Roberta QA model------------------
@@ -59,11 +58,16 @@ if __name__ == '__main__':
         print("---------------sentence output-------------")
         highestSheetVal = 0
         highestSheetAnswer = []
+        secondHighestSheetAnswer = []
+        secondHighestSheetVal = 0
         for name, value in sheetValues.items():
             if value >= highestSheetVal:
+                secondHighestSheetVal = highestSheetVal
                 highestSheetVal = value
+                secondHighestSheetAnswer = highestSheetAnswer
                 highestSheetAnswer = name
         print(str(highestSheetAnswer) + " : score : " + str(highestSheetVal))
+        print(str(secondHighestSheetAnswer) + " : score : " + str(secondHighestSheetVal))
 
         stop = timeit.default_timer()
         print("\n" + "Time taken: " + str(round((stop-start), 1)) + " seconds")
