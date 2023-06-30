@@ -28,7 +28,7 @@ nlp = pipeline('question-answering', model=model_name, tokenizer=model_name)
 #----------------------------------------------Topic identifier------------------------------------------------
 def get_topics(input, labels):
     classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
-    output = classifier(input, labels, multi_label=True)
+    output = classifier(input, labels) #multi_label=True
     formatedOutput = []
     for i in range(len(labels)):
         formatedOutput.append(output['labels'][i] + ': ' + str(round(output['scores'][i]*100, 3)) + "%")
@@ -52,7 +52,8 @@ while True:
     print("----------------topics---------------------")
     #layer 1
     topics = get_topics(query, makeTitleList(data))
-    print(topics)
+    for values in topics:
+        print(values)
     #layer 1 best result key
     topTopicLayer1 = (str(topics[0]).split(":"))[0]
 
