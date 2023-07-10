@@ -9,7 +9,7 @@ from outputDataFunctions import *
 from transformers import pipeline
 
 #--------------Test data loader-----------------------
-file = open('testdata.json')
+file = open('../DataFiles/testdata.json')
 data = json.load(file)
 
 #---------------Label loader--------------------------
