@@ -69,7 +69,7 @@ JsonString += "}"
 
 JsonObject = json.loads(JsonString)
 
-object = json.dumps(JsonObject, indent=4)
+object = json.dumps(JsonObject, indent=4, ensure_ascii=False)
 
 print(object)
 
