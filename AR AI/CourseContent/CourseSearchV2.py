@@ -4,7 +4,7 @@ from outputDataFunctions import *
 from transformers import pipeline
 
 #---------------load course data---------------------
-file = open('courseData.json', encoding="utf8")
+file = open('../DataFiles/courseData.json', encoding="utf8")
 courseData = json.load(file)
 
 #---------------Model Loader-------------------------
