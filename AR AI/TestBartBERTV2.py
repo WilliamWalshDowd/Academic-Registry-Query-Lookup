@@ -32,7 +32,7 @@ def get_topics(input, labels):
     formatedOutput = []
     for i in range(len(labels)):
         formatedOutput.append(output['labels'][i] + ': ' + str(round(output['scores'][i]*100, 3)) + "%")
-    
+        
     return formatedOutput
 
 #---------------Roberta QA model------------------
