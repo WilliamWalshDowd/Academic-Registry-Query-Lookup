@@ -1,7 +1,9 @@
 import json
 import timeit
-from outputDataFunctions import *
+import sys
 from transformers import pipeline
+sys.path.insert(0, '..')
+from outputDataFunctions import *
 
 #-------------load course data--------------
 file = open('../DataFiles/courseData.json', encoding="utf8")

@@ -99,7 +99,6 @@ def coursePageToList(soup):
                     courseDetails = courseDetails + ", " + n.getText()
                 elif(n.getText() != ""):
                     courseDetails = n.getText()
-                #print(courseDetails)
         newList.update({currentH2:(courseDetails)})
 
     return newList
