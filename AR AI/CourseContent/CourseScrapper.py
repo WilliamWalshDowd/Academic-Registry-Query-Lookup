@@ -15,7 +15,7 @@ def getdata(url):
     return r.text
 
 def customTagSelector(tag):
-    return tag.name == "p" or tag.name == "span" or tag.name == "h2"
+    return tag.name == "p" or tag.name == "span" or tag.name == "h2" or tag.name == "h3" or tag.name == "font" or tag.name == "li" or tag.name == "text"
 
 # append course data to list
 def courseDataToList(soup):
@@ -89,18 +89,20 @@ def coursePageToList(soup):
                 if currentH2 != "":
                     if courseDetails == "":
                         courseDetails = "No info on webpage"
+                    elif courseDetails == "Click here for a full list of undergraduate fees.":
+                        courseDetails = courseDetails + " https://www.tcd.ie/academicregistry/fees-and-payments/"
                     newList.update({currentH2:(courseDetails)})
                     courseDetails = ""
                 #print("     " + str(n))
                 currentH2 = n.getText()
-            elif (('<p>' in str(n))or('<span>' in str(n)))and(idx != 0):
+            elif (idx != 0):
                 #print("     " + n.getText())
                 if (courseDetails != "") and (n.getText() != courseDetails):
                     courseDetails = courseDetails + ", " + n.getText()
                 elif(n.getText() != ""):
                     courseDetails = n.getText()
-                #print(courseDetails)
-        newList.update({currentH2:(courseDetails)})
+        if currentH2 != "" and courseDetails != "":
+            newList.update({currentH2:(courseDetails)})
 
     return newList
 
@@ -139,4 +141,4 @@ if __name__ == "__main__":
 
     print(str(len(coursePageList)) + " / " + str(len(linkList)))
 
-    #saveToJSON(coursePageList, path)
+    saveToJSON(coursePageList, "../DataFiles/courseData.json")

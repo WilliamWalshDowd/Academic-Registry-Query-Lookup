@@ -5,6 +5,8 @@ import webbrowser
 import timeit
 from multiprocessing import Process
 import multiprocessing
+import sys
+sys.path.insert(0, '..')
 from outputDataFunctions import *
 from transformers import pipeline
 

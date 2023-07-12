@@ -16,4 +16,11 @@ def courseDataNames(data):
 
 if __name__ == "__main__":
     print("----COURSES----")
-    print(courseDataNames(courseData))
+    courseNames = courseDataNames(courseData)
+    print(courseNames)
+    while True:
+        print("what course are you looking for?")
+        query = input('>')
+        for i in courseNames:
+            if query in i:
+                print(i)

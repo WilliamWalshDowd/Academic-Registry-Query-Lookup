@@ -1,6 +1,8 @@
 import json
 import os
 import webbrowser
+import sys
+sys.path.insert(0, '..')
 from outputDataFunctions import *
 from transformers import pipeline
 
