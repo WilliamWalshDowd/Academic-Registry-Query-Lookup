@@ -15,7 +15,7 @@ def getdata(url):
     return r.text
 
 def customTagSelector(tag):
-    return tag.name == "p" or tag.name == "span" or tag.name == "h2" or tag.name == "h3" or tag.name == "font" or tag.name == "li" or tag.name == "text"
+    return tag.name == "p" or tag.name == "span" or tag.name == "h2" or tag.name == "h3" or tag.name == "font" or tag.name == "li" or tag.name == "#"
 
 # append course data to list
 def courseDataToList(soup):
@@ -78,31 +78,61 @@ def coursePageToList(soup):
         newList.update({"Course Options":courseOptionsList})
 
     #Admission Requirements
-    step9 = soup.find('div', class_ = "container course-fees-wrapper")
-    if step9 != None:
-        #print("found div-------------------------------------------------------------")
-        courseDetails = ""
-        currentH2 = ""
-        for idx,n in enumerate(step9.find_all(customTagSelector)):
-            #print(str(n))
-            if ('</h2>' in str(n)):
-                if currentH2 != "":
-                    if courseDetails == "":
-                        courseDetails = "No info on webpage"
-                    elif courseDetails == "Click here for a full list of undergraduate fees.":
-                        courseDetails = courseDetails + " https://www.tcd.ie/academicregistry/fees-and-payments/"
-                    newList.update({currentH2:(courseDetails)})
-                    courseDetails = ""
-                #print("     " + str(n))
-                currentH2 = n.getText()
-            elif (idx != 0):
-                #print("     " + n.getText())
-                if (courseDetails != "") and (n.getText() != courseDetails):
-                    courseDetails = courseDetails + ", " + n.getText()
-                elif(n.getText() != ""):
-                    courseDetails = n.getText()
-        if currentH2 != "" and courseDetails != "":
-            newList.update({currentH2:(courseDetails)})
+    # step9 = soup.find('div', class_ = "container course-fees-wrapper")
+    # if step9 != None:
+    #     #print("found div-------------------------------------------------------------")
+    #     courseDetails = ""
+    #     currentH2 = ""
+    #     for idx,n in enumerate(step9.find_all(customTagSelector)):
+    #         #print(str(n))
+    #         if ('</h2>' in str(n)):
+    #             if currentH2 != "":
+    #                 if courseDetails == "":
+    #                     courseDetails = "No info on webpage"
+    #                 elif courseDetails == "Click here for a full list of undergraduate fees.":
+    #                     courseDetails = courseDetails + " https://www.tcd.ie/academicregistry/fees-and-payments/"
+    #                 newList.update({currentH2:(courseDetails)})
+    #                 courseDetails = ""
+    #             #print("     " + str(n))
+    #             currentH2 = n.getText()
+    #         elif (idx != 0):
+    #             #print("     " + n.getText())
+    #             if (courseDetails != "") and (n.getText() != courseDetails):
+    #                 courseDetails = courseDetails + ", " + n.getText()
+    #             elif(n.getText() != ""):
+    #                 courseDetails = n.getText()
+    #     if currentH2 != "" and courseDetails != "":
+    #         newList.update({currentH2:(courseDetails)})
+
+    admissionDiv = (soup.find('div', class_ = "container course-fees-wrapper")).find('div', class_ = "course-content-hidden__block")
+    if admissionDiv != None:
+        admissionContent = ""
+        for i in admissionDiv.findAll():
+            if '<h2>' not in i.getText():
+                if admissionContent != "":
+                    admissionContent = admissionContent + "\n" + i.getText()
+                else:
+                    admissionContent = i.getText() + ": "
+        if admissionContent == "":
+            admissionContent = "No info on the webpage"
+        newList.update({"Admission Requirements":(admissionContent)})
+    else:
+        newList.update({"Admission Requirements":("No info on the webpage")})
+
+    FeesDiv = (soup.find('div', class_ = "container course-fees-wrapper")).findAll('div', class_ = "col-sm-12")
+    if FeesDiv != None:
+        feesContent = ""
+        for i in FeesDiv[-1].findAll():
+            if '<h2>' not in i.getText():
+                if feesContent != "":
+                    feesContent = feesContent + "\n" + i.getText()
+                else:
+                    feesContent = i.getText() + ": "
+        if feesContent == "":
+            feesContent = "No info on the webpage"
+        newList.update({"Fees and Payments":(feesContent + ". Link to fees page https://www.tcd.ie/academicregistry/fees-and-payments/")})
+    else:
+        newList.update({"Fees and Payments":("No info on the webpage")})
 
     return newList
 

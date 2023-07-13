@@ -5,7 +5,7 @@ sys.path.insert(0, '..')
 from outputDataFunctions import *
 from transformers import pipeline
 
-COURSEINFOHEADERS = ["Overview", "Awards", "Number of Places", "Next Intake", "Course Coordinator", "Course Director", "Admission Requirements", "Closing Date", "Course Fees", "Link"]
+COURSEINFOHEADERS = ["Overview", "Awards", "Number of Places", "Next Intake", "Course Coordinator", "Course Director", "Admission Requirements", "Closing Date", "Course Fees"]
 
 #---------------load course data---------------------
 file = open('../DataFiles/courseData.json', encoding="utf8")
@@ -29,6 +29,13 @@ def get_topics(input, labels):
         formatedOutput.append(output['labels'][i] + ': ' + str(round(output['scores'][i]*100, 3)) + "%")
     return formatedOutput
 
+#---------------Header List Find---------------------
+def findHeaderList(sheet):
+    distinct = []
+    for key in sheet.keys():
+        distinct.append(key)
+    return distinct
+
 #----------------------------------------------------
 def courseDataNames(data):
     list = []
@@ -41,26 +48,31 @@ if __name__ == "__main__":
         print("Ask about courses")
         query = input('>')
         start = timeit.default_timer()
-        print("----------------Headings---------------------")
-        headings = get_topics(query, COURSEINFOHEADERS)
-        for n in headings:
-            print(n)
-        TopHeading = headings[0]
         print("----------------Names---------------------")
         names = get_topics(query, courseDataNames(courseData))
         for values in names:
             print(values)
         #layer 1 best result key
         topName = (str(names[0]).split(":"))[0]
+        topSheet = {}
+        for i in courseData:
+            if i['Name'] == topName:
+                topSheet = i
+
+        print("----------------Headings---------------------")
+        headings = get_topics(query, findHeaderList(topSheet))
+        for n in headings:
+            print(n)
+        TopHeading = (str(headings[0]).split(":"))[0]
 
         print("---------------Course output-------------")
         for i in courseData:
             if i['Name'] == topName:
                 try:
-                    print(i[TopHeading.split(':', 0)])
+                    print(i[TopHeading])
                     print("Here is the Course page for " + topName + i['Link'])
                 except:
-                    print("No " + TopHeading.split("% ", 1)[1] + " data found in file for " + topName)
+                    print("No " + TopHeading + " data found in file for " + topName)
                     print("Here is the Course page for " + topName + i['Link'])
                 
         stop = timeit.default_timer()
