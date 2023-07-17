@@ -19,7 +19,7 @@ printDataTitle(data)
 print("----------------------------------------------")
 
 #---------------Model Loader-------------------------
-model_name = "deepset/bert-large-uncased-whole-word-masking-squad2"
+model_name = "timpal0l/mdeberta-v3-base-squad2"
 nlp = pipeline('question-answering', model=model_name, tokenizer=model_name)
 
 #---------------Roberta QA model------------------

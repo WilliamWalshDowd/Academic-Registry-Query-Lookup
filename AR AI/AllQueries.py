@@ -5,9 +5,13 @@ import timeit
 from multiprocessing import Process
 import multiprocessing
 import sys
+import torch
+import torch.nn.functional as F
+from sentence_transformers import SentenceTransformer, util
+import requests
 sys.path.insert(0, '..')
 from outputDataFunctions import *
-from transformers import pipeline
+from transformers import pipeline, AutoTokenizer, AutoModel
 
 COURSEINFOHEADERS = ["Overview", "Awards", "Number of Places", "Next Intake", "Course Coordinator", "Course Director", "Admission Requirements", "Closing Date", "Course Fees"]
 
@@ -20,10 +24,9 @@ courseData = json.load(file)
 #---------------Label loader--------------------------
 print("---------------loading data-------------------")
 justSheets = compileSheetsToList(data)
-print("----------------------------------------------") 
 
 #---------------Model Loader-------------------------
-model_name = "deepset/bert-large-uncased-whole-word-masking-squad2"
+model_name = "deepset/tinyroberta-squad2"
 nlp = pipeline('question-answering', model=model_name, tokenizer=model_name)
 
 #---------------Roberta QA model------------------
@@ -66,6 +69,7 @@ if __name__ == "__main__":
         if (str(filter1[0]).split(":"))[0] == 'General query':
             #-------------------------------General-----------------------------------------
             printDataTitle(data)
+            print("-------------------------------------------")
             print("Ask a Query about general information (Example: 'Give me information about CAO Applications')")
             query = input('>')
             start = timeit.default_timer()
@@ -77,9 +81,9 @@ if __name__ == "__main__":
 
             startLoop = timeit.default_timer()
             for sheet in justSheets:
-                rawContent = sheet['Title'] + ": " + sheet['Content']
+                rawContent = sheet['Title'] + " " + sheet['Content']
                 modelOutput = getQAOutput(nlp, query, rawContent)
-                sheetValues.update({str(sheet['Title']) + " : " + str(getSentenceFromQuote(modelOutput['answer'], rawContent)) : modelOutput['score']})
+                sheetValues.update({str(sheet['Title']) + " : " + str(getSentenceFromQuote(modelOutput['answer'], rawContent)) : (modelOutput['score'])})
                 # print(str(sheet['Title']) + " : " + str(getSentenceFromQuote(modelOutput['answer'], rawContent)) + "(" + str(modelOutput['score']) + ")")
                 stopLoop = timeit.default_timer()
                 percentagePerSecond = round((1/(stopLoop-startLoop))*((barInterable+1)/len(justSheets))*100, 2)
@@ -87,26 +91,47 @@ if __name__ == "__main__":
                 printProgressBar(barInterable + 1, labelCount, prefix = 'Progress:', suffix = 'Complete (' + str(percentagePerSecond) + "% per second, time left " + str(estimatedFinishTime) + " seconds ", length = 50)
                 barInterable += 1
 
-            print("---------------sentence output-------------")
-            highestSheetVal = 0
-            highestSheetAnswer = []
-            secondHighestSheetAnswer = []
-            secondHighestSheetVal = 0
-            for name, value in sheetValues.items():
-                if value >= highestSheetVal:
-                    secondHighestSheetVal = highestSheetVal
-                    highestSheetVal = value
-                    secondHighestSheetAnswer = highestSheetAnswer
-                    highestSheetAnswer = name
+            print("---------------Similarity------------------")
+            model = SentenceTransformer('all-MiniLM-L6-v2')
+
+            # Two lists of sentences
+            sentences1 = []
+            for i in makeTitleList(data):
+                sentences1.append(query)
+            #print(len(sentences1))
+
+            sentences2 = makeTitleList(data)
+            #print(len(sentences2))
+
+            #Compute embedding for both lists
+            embeddings1 = model.encode(sentences1, convert_to_tensor=True)
+            embeddings2 = model.encode(sentences2, convert_to_tensor=True)
+
+            #Compute cosine-similarities
+            cosine_scores = util.cos_sim(embeddings1, embeddings2)
+            print(cosine_scores)
+
+            #Offset the pairs with their
+            iterable = 0
+            for key, value in sheetValues.items():
+                score = (cosine_scores[iterable][iterable])
+                sheetValues[key] = value*(score*score)
+                # print("{} \t {} \t Score: {:.4f}".format(sentences1[iterable], sentences2[iterable], score))
+                iterable += 1
+
+            print("---------------Sentence output-------------")
+            highestSheetVal = max(sheetValues.values())
+            highestSheetAnswer = (list(sheetValues.keys())[list(sheetValues.values()).index(highestSheetVal)])
             print(str(highestSheetAnswer) + " : score : " + str(highestSheetVal))
-            print(str(secondHighestSheetAnswer) + " : score : " + str(secondHighestSheetVal))
+            #for key, name in sorted(sheetValues.items(), key=lambda x:x[1], reverse=True):
+                #print(key + " : " + str(name))
 
             stop = timeit.default_timer()
             print("\n" + "Time taken: " + str(round((stop-start), 1)) + " seconds")
-
             print("-------------------------------------------")
         else:
             #-------------------------------Course------------------------------------------
+            print("-------------------------------------------")
             print("Ask a Query about Courses (Example: 'what are the admission requirements for Economics?')")
             query = input('>')
             start = timeit.default_timer()
