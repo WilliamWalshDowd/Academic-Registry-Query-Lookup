@@ -1,17 +1,12 @@
 import json
-import os
-import webbrowser
 import timeit
 from multiprocessing import Process
-import multiprocessing
 import sys
-import torch
 import torch.nn.functional as F
 from sentence_transformers import SentenceTransformer, util
-import requests
 sys.path.insert(0, '..')
 from outputDataFunctions import *
-from transformers import pipeline, AutoTokenizer, AutoModel
+from transformers import pipeline
 
 COURSEINFOHEADERS = ["Overview", "Awards", "Number of Places", "Next Intake", "Course Coordinator", "Course Director", "Admission Requirements", "Closing Date", "Course Fees"]
 
@@ -109,7 +104,7 @@ if __name__ == "__main__":
 
             #Compute cosine-similarities
             cosine_scores = util.cos_sim(embeddings1, embeddings2)
-            print(cosine_scores)
+            print()
 
             #Offset the pairs with their
             iterable = 0
@@ -157,10 +152,10 @@ if __name__ == "__main__":
                 if i['Name'] == topName:
                     try:
                         print(i[TopHeading])
-                        print("Here is the Course page for " + topName + i['Link'])
+                        print("Here is the Course page for " + topName + ": " + i['Link'])
                     except:
                         print("No " + TopHeading + " data found in file for " + topName)
-                        print("Here is the Course page for " + topName + i['Link'])
+                        print("Here is the Course page for " + topName + ": " + i['Link'])
                     
             stop = timeit.default_timer()
             print("\n" + "Time taken: " + str(round((stop-start), 1)) + " seconds")
