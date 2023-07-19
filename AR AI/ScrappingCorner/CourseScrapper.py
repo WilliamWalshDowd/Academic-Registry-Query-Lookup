@@ -77,7 +77,7 @@ def coursePageToList(soup):
             courseOptionsList.update({escapeString(n.getText()):n.get("href")})
         newList.update({"Course Options":courseOptionsList})
 
-    #Admission Requirements
+    #Admission Requirements older version
     # step9 = soup.find('div', class_ = "container course-fees-wrapper")
     # if step9 != None:
     #     #print("found div-------------------------------------------------------------")
@@ -104,6 +104,7 @@ def coursePageToList(soup):
     #     if currentH2 != "" and courseDetails != "":
     #         newList.update({currentH2:(courseDetails)})
 
+    #Admission Requirements
     admissionDiv = (soup.find('div', class_ = "container course-fees-wrapper")).find('div', class_ = "course-content-hidden__block")
     if admissionDiv != None:
         admissionContent = ""
@@ -119,6 +120,7 @@ def coursePageToList(soup):
     else:
         newList.update({"Admission Requirements":("No info on the webpage")})
 
+    #Fee and Payments
     FeesDiv = (soup.find('div', class_ = "container course-fees-wrapper")).findAll('div', class_ = "col-sm-12")
     if FeesDiv != None:
         feesContent = ""
@@ -133,6 +135,16 @@ def coursePageToList(soup):
         newList.update({"Fees and Payments":(feesContent + ". Link to fees page https://www.tcd.ie/academicregistry/fees-and-payments/")})
     else:
         newList.update({"Fees and Payments":("No info on the webpage")})
+
+    #School Website link
+    schoolDiv = (soup.find('div', class_ = "course-tab course-tab--get-in-touch"))
+    if schoolDiv != None:
+        lastElement = ""
+        for i in schoolDiv.findAll():
+            if "Website" in lastElement:
+                #print(i.getText())
+                newList.update({"School Webpage":"https://" + re.sub(' | ','', i.getText())})
+            lastElement = i.getText()
 
     return newList
 
