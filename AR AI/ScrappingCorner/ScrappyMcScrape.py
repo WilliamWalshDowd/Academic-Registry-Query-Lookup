@@ -1,14 +1,13 @@
 
 import json, re
 import requests
-import os.path
 from bs4 import BeautifulSoup
 
 
 # escape string to allow json to parse
 def escapeString(string):
     step1 = re.sub('\s+',' ', string)
-    step2 = re.sub('\"','\\"', step1)
+    step2 = re.sub('\n','', step1)
     return step2
   
 # link for extract html data 
@@ -16,62 +15,79 @@ def getdata(url):
     r = requests.get(url) 
     return r.text 
 
-htmldata = getdata("https://www.tcd.ie/academicregistry/fees-and-payments/applicants/how-do-I-pay/")
-soup = BeautifulSoup(htmldata, 'html.parser')
-data = ''
-# for data in soup.find_all("h2"):
-#     print(data.get_text())
+def getDataJson(link):
 
-table = soup.find('div', attrs = {'id':'main-content'})
+    htmldata = getdata(link)
+    soup = BeautifulSoup(htmldata, 'html.parser')
 
-deadSize = 3
-topLoop = 5
-loops = [0, 0, 0, 0, 0]
+    newList = {}
+    
+    step4 = soup.find('div', class_ = "main-content")
+    if step4 != None:
+        #print("found div-------------------------------------------------------------")
+        details = ""
+        currentH3 = ""
+        headerlist = []
+        for i in step4.find_all('h2'):
+            headerlist.append(i.getText())
+        for idx,n in enumerate(step4.find_all()):
+            if ('<h2>' in str(n)):
+                if currentH3 != "":
+                    newList.update({escapeString(currentH3):escapeString(details)})
+                    details = ""
+                #print("     " + str(n))
+                currentH3 = n.getText()
+            elif ('<p>' in str(n) or '<span>' in str(n) or '<h3>' in str(n))and(idx != 0):
+                #print("     " + n.getText())
+                if (details != "") and (n.getText() != details):
+                    details = details + ", " + n.getText()
+                elif(n.getText() != ""):
+                    details = n.getText()
+                #print(details)
+        newList.update({escapeString(currentH3):escapeString(details)})
 
-JsonString = "{"
+        finalList = {}
+        for key,value in newList.items():
+            #print(str(key) + ":" + str(value))
+            for i in headerlist:
+                #print("HEAD     " + str(i))
+                #print("VALUE    " + str(key))
+                if str(key).replace(' ', '') in str(i).replace(' ',''):
+                    #print("TRUE")
+                    finalList.update({key:value})
 
-for n in range(deadSize):
-    table = table.findNext("h2")
+    return finalList
 
-for n in range(topLoop):
-    table = table.findNext("h2")
-    print("h2 " + table.get_text() + "===================================================================================================================================")
-    JsonString += '"' + escapeString(table.get_text()) + '"' + ":["
+def saveToJSON(list, path):
+    jsonObject = json.dumps(list, indent=4, ensure_ascii=False)
+    with open(path, "w", encoding="utf-8") as outfile:
+        outfile.write(jsonObject)
 
-    if loops[n] != 0:
-        for i in range(loops[n]):
-            table = table.findNext("h3")
-            #print("h3     " + table.get_text() + "-----------------------------------------------------------------------------------------------------------------------------------")
-            JsonString += '{"Title" : "' + escapeString(str(table.get_text())) + '",'
+if __name__ == "__main__":
+    htmldata = getdata('https://www.tcd.ie/academicregistry/sitemap/')
+    soup = BeautifulSoup(htmldata, 'html.parser')
+    sitemap  = soup.find('div', class_ = 'section-sitemap')
 
-            table = table.findNext("div")
-            #print("p          " + table.get_text())
-            JsonString += '"Content" : "' + escapeString(str(table.get_text())) + '"}'
-            if i != loops[n]-1:
-                JsonString += ','
-            #print("-----------------------------------------------------------------------------------------------------------------------------------")
-    else:
-        #print("h3     " + table.get_text() + "-----------------------------------------------------------------------------------------------------------------------------------")
-        JsonString += '{"Title" : "' + escapeString(str(table.get_text())) + '",'
+    sitemapPages = {}
+    for elements in sitemap.findAll('a'):
+        sitemapPages.update({elements.getText():elements.get('href')})
 
-        table = table.findNext("div")
-        #print("p          " + table.get_text())
-        JsonString += '"Content" : "' + escapeString(str(table.get_text()))  + '"}'
-        #print("-----------------------------------------------------------------------------------------------------------------------------------")
-        
-    if n == topLoop-1:
-        JsonString += "]"
-    else:
-        JsonString += "],"
-    #print("===================================================================================================================================")
+    jsonList = []
+    for name, link in sitemapPages.items():
+        try:
+            pageFiles = getDataJson(link)
+        except:
+            try:
+                pageFiles = getDataJson('https:' + link)
+            except:
+                print('Invalid/Locked URL: ' + link)
+            
+            if pageFiles != {}:
+                for i,j in pageFiles.items():
+                    if (str(i).replace(' ', '') != "") and (str(j).replace(' ', '') != ""):
+                        #print('i     ' + str(i))
+                        #print('j     ' + str(j))
+                        jsonList.append({'Title':name + ' - ' + str(i), 'Content':str(j)})
+                        #print(jsonList)
 
-JsonString += "}"
-
-JsonObject = json.loads(JsonString)
-
-object = json.dumps(JsonObject, indent=4, ensure_ascii=False)
-
-print(object)
-
-with open("ScrappyOutput.json", "w") as outfile:
-    outfile.write(object)
+    saveToJSON(jsonList, '../DataFiles/AcademicRegData.json')

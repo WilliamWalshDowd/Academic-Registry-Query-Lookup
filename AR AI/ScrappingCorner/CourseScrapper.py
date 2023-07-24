@@ -71,9 +71,9 @@ def coursePageToList(soup):
 
     #Course Options
     courseOptionsList = {}
-    step8 = soup.find('div', class_ = "course-tab course-tab--options")
-    if step8 != None:
-        for n in step8.findAll('a'):
+    courseSoup = soup.find('div', class_ = "course-tab course-tab--options")
+    if courseSoup != None:
+        for n in courseSoup.findAll('a'):
             courseOptionsList.update({escapeString(n.getText()):n.get("href")})
         newList.update({"Course Options":courseOptionsList})
 
