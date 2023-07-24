@@ -1,18 +1,18 @@
 # Academic-Registry-Query-Lookup
 A simple AI implementation of 2 models that use data from the tcd.ie website to answer queries.
 
-## Run
+## Running
 To run each of the versions make sure to check that the data files are added. If not then just go to the scrapping files and run them, This will add the data to the files.
-Example of course scrapping and search execution:
-> py CourseSearchV2.py
-> 
-> Output:
-> 
-> ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/bc323655-af01-4456-bf8e-cfc61f31c5d8)
+There are 4 different folders each with there own files that do:
+1. Course Content searching in multiple different methods
+2. Data File used by search functions
+3. General query search functions with various implementations
+4. Web Scrapper files for adding data to data files
 
-
-> py CourseScraper.py
->
-> Output:
->
-> ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/a191628d-068c-459a-a984-a279e137319f)
+## Examples
+### Course Search example:
+> **input:** "what are the admission requirements for Economics?"
+> 
+> **output:** ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/24ec5997-9dbe-4f62-8a6a-68a4f2c51847)
+> ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/46760c64-bd2d-4317-aafd-db62a9a38a24)
+> ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/72db878d-f602-4307-9d49-d329e85f5644)
