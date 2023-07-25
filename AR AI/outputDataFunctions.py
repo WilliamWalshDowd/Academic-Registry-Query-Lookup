@@ -23,8 +23,12 @@ def makeTitleList(catagory, dataVal):
 
 def makeTitleList(dataVal):
     justSheetLabels = []
-    for catagory, value in dataVal.items():
-        for sheet in value:
+    try:
+        for catagory, value in dataVal.items():
+            for sheet in value:
+                justSheetLabels.append(sheet['Title'])
+    except:
+        for sheet in dataVal:
             justSheetLabels.append(sheet['Title'])
     return justSheetLabels
 
@@ -45,8 +49,12 @@ def getHTMLOutput(title, dataVal, labels):
 
 def compileSheetsToList(dataVal):
     justSheets = []
-    for catagory, value in dataVal.items():
-        for sheet in value:
+    try:
+        for catagory, value in dataVal.items():
+            for sheet in value:
+                justSheets.append({'Title' : sheet['Title'], 'Content' : sheet['Content']})
+    except:
+        for sheet in dataVal:
             justSheets.append({'Title' : sheet['Title'], 'Content' : sheet['Content']})
     return justSheets
 
@@ -66,16 +74,24 @@ def findLabelFromQuote(quote, dataVal):
 
 def getAmountOfLabels(dataVal):
     count = 0
-    for catagory, value in dataVal.items():
-        for sheet in value:
+    try:
+        for catagory, value in dataVal.items():
+            for sheet in value:
+                count += 1
+    except:
+        for value in dataVal:
             count += 1
     return count
 
 def printDataTitle(dataVal):
-    for catagory, value in dataVal.items():
-        print('\n' + catagory)
-        for sheet in value:
-            print("   " + sheet['Title'])
+    try:
+        for catagory, value in dataVal.items():
+            print('\n' + catagory)
+            for sheet in value:
+                print("   " + sheet['Title'])
+    except:
+        for value in dataVal:
+            print(value['Title'])
 
 def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
     """

@@ -14,7 +14,7 @@ COURSEINFOHEADERS = ["Overview", "Awards", "Number of Places", "Next Intake", "C
 
 #--------------Test data loader-----------------------
 def loadTestData():
-    file = open('DataFiles/testdata.json', encoding="utf8")
+    file = open('DataFiles/AcademicRegData.json', encoding="utf8")
     generalData = json.load(file)
     return generalData
 
@@ -76,11 +76,11 @@ def generalSearch(query):
     barInterable = 0
     labelCount = getAmountOfLabels(generalData)
     printProgressBar(barInterable, labelCount, prefix = 'Progress:', suffix = 'Complete', length = 50)
-
+    nlp = loadNLP("deepset/tinyroberta-squad2")
     startLoop = timeit.default_timer()
     for sheet in justSheets:
         rawContent = sheet['Title'] + " " + sheet['Content']
-        modelOutput = getQAOutput(loadNLP("deepset/xlm-roberta-large-squad2"), query, rawContent)
+        modelOutput = getQAOutput(nlp, query, rawContent)
         sheetValues.update({str(sheet['Title']) + " : " + str(getSentenceFromQuote(modelOutput['answer'], rawContent)) : (modelOutput['score'])})
         # print(str(sheet['Title']) + " : " + str(getSentenceFromQuote(modelOutput['answer'], rawContent)) + "(" + str(modelOutput['score']) + ")")
         stopLoop = timeit.default_timer()
