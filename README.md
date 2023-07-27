@@ -12,6 +12,7 @@ There are 4 different folders each with there own files that do:
   To run each of the versions make sure to check that the data files are added or else you wont have any data to query. The scraper files propogate the data files but double check them if the program ins't working as intended.
 Running each of the query files will simple work in the terminal. Examples of how they work is below.
 > py \Academic-Registry-Query-Lookup\AR AI\AllQueries.py
+> 
 This will run the best of both query asnwering functions together and will propt which one to use in the terminal.
 
 ## Examples
