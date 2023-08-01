@@ -1,6 +1,5 @@
 import json
 import timeit
-#from multiprocessing import Process
 import sys
 
 from sentence_transformers import SentenceTransformer, util
@@ -14,12 +13,18 @@ COURSEINFOHEADERS = ["Overview", "Awards", "Number of Places", "Next Intake", "C
 
 #--------------Test data loader-----------------------
 def loadTestData():
-    file = open('DataFiles/AcademicRegData.json', encoding="utf8")
+    try:
+        file = open('AcademicRegData.json', encoding="utf8")
+    except:
+        file = open('/DataFiles/AcademicRegData.json', encoding="utf8")
     generalData = json.load(file)
     return generalData
 
 def loadCourseData():
-    file = open('DataFiles/courseData.json', encoding="utf8")
+    try:
+        file = open('courseData.json', encoding="utf8")
+    except:
+        file = open('/DataFiles/courseData.json', encoding="utf8")
     courseData = json.load(file)
     return courseData
 

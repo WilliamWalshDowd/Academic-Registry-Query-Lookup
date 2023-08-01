@@ -11,3 +11,6 @@ def generate_random_password():
 	random.shuffle(password)
 
 	return ('Random password: '+''.join(password))
+
+def inputTest(value):
+	value = str(value) + ' test'
