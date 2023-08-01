@@ -1,9 +1,8 @@
 import json
 import timeit
-#from multiprocessing import Process
 import sys
 
-#from sentence_transformers import SentenceTransformer, util
+from sentence_transformers import SentenceTransformer, util
 sys.path.insert(0, '..')
 from outputDataFunctions import *
 from transformers import pipeline
