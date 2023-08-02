@@ -32,9 +32,7 @@
   <div id="test-output"></div>
 
   <py-env>
-    - transformers
     - paths:
-      - ./example.py
       - ./AllQueries.py
       - ./outputDataFunctions.py
       - ./DataFiles/courseData.json
@@ -43,7 +41,8 @@
 
   <py-script>
     async def main():
-      await micropip.install(["transformers", "pytorch", "sentence-transformers"], keep_going=True)
+      console.log(f'loading files')
+      await micropip.install(["transformers"])
     loop.run_until_complete(main())
     
     from js import console

@@ -7,28 +7,25 @@ sys.path.insert(0, '..')
 from outputDataFunctions import *
 from transformers import pipeline
 
-
-# default for testing, headers are decided based on which course is selected
-COURSEINFOHEADERS = ["Overview", "Awards", "Number of Places", "Next Intake", "Course Coordinator", "Course Director", "Admission Requirements", "Closing Date", "Course Fees"]
-
-#--------------Test data loader-----------------------
+#---------------Test data loader---------------------
 def loadTestData():
     try:
         file = open('AcademicRegData.json', encoding="utf8")
     except:
-        file = open('/DataFiles/AcademicRegData.json', encoding="utf8")
+        file = open('./DataFiles/AcademicRegData.json', encoding="utf8")
     generalData = json.load(file)
     return generalData
 
+#---------------Load course data---------------------
 def loadCourseData():
     try:
         file = open('courseData.json', encoding="utf8")
     except:
-        file = open('/DataFiles/courseData.json', encoding="utf8")
+        file = open('./DataFiles/courseData.json', encoding="utf8")
     courseData = json.load(file)
     return courseData
 
-#---------------Label loader--------------------------
+#---------------Label loader-------------------------
 def getSheetLabels(generalData):
     justSheets = compileSheetsToList(generalData)
     return justSheets
@@ -38,7 +35,7 @@ def loadNLP(model_name):
     nlp = pipeline('question-answering', model=model_name, tokenizer=model_name)
     return nlp
 
-#---------------Roberta QA model------------------
+#---------------Roberta QA model---------------------
 def getQAOutput(nlp, question, context):
     QA_input = {
         'question': question,
@@ -63,13 +60,14 @@ def findHeaderList(sheet):
         distinct.append(key)
     return distinct
 
-#----------------------------------------------------
+#---------------Get course data names----------------
 def courseDataNames(data):
     list = []
     for i in data:
         list.append(i['Name'])
     return list
 
+#---------------General query search-----------------
 def generalSearch(query):
     generalData = loadTestData()
     justSheets = getSheetLabels(generalData)
@@ -87,7 +85,6 @@ def generalSearch(query):
         rawContent = sheet['Title'] + " " + sheet['Content']
         modelOutput = getQAOutput(nlp, query, rawContent)
         sheetValues.update({str(sheet['Title']) + " : " + str(getSentenceFromQuote(modelOutput['answer'], rawContent)) : (modelOutput['score'])})
-        # print(str(sheet['Title']) + " : " + str(getSentenceFromQuote(modelOutput['answer'], rawContent)) + "(" + str(modelOutput['score']) + ")")
         stopLoop = timeit.default_timer()
         percentagePerSecond = round((1/(stopLoop-startLoop))*((barInterable+1)/len(justSheets))*100, 2)
         estimatedFinishTime = round((100-((barInterable+1)/len(justSheets))*100)/percentagePerSecond, 1)
@@ -101,10 +98,8 @@ def generalSearch(query):
     sentences1 = []
     for i in makeTitleList(generalData):
         sentences1.append(query)
-    #print(len(sentences1))
 
     sentences2 = makeTitleList(generalData)
-    #print(len(sentences2))
 
     #Compute embedding for both lists
     embeddings1 = model.encode(sentences1, convert_to_tensor=True)
@@ -118,32 +113,63 @@ def generalSearch(query):
     for key, value in sheetValues.items():
         score = (cosine_scores[iterable][iterable])
         sheetValues[key] = value*(score*score)
-        # print("{} \t {} \t Score: {:.4f}".format(sentences1[iterable], sentences2[iterable], score))
         iterable += 1
 
     print("---------------Sentence output-------------")
     highestSheetVal = max(sheetValues.values())
     highestSheetAnswer = (list(sheetValues.keys())[list(sheetValues.values()).index(highestSheetVal)])
     print(str(highestSheetAnswer) + " : score : " + str(highestSheetVal))
-    #for key, name in sorted(sheetValues.items(), key=lambda x:x[1], reverse=True):
-        #print(key + " : " + str(name))
 
     stop = timeit.default_timer()
     print("\n" + "Time taken: " + str(round((stop-start), 1)) + " seconds")
     print("-------------------------------------------")
     return (str(highestSheetAnswer) + " : score : " + str(highestSheetVal))
 
+#---------------Course specific search---------------
 def courseSearch(query):
     courseData = loadCourseData()
     #-------------------------------Course------------------------------------------
     print("-------------------------------------------")
     start = timeit.default_timer()
     print("----------------Names---------------------")
-    names = get_topics(query, courseDataNames(courseData))
-    for values in names:
-        print(values)
-    #layer 1 best result key
-    topName = (str(names[0]).split(":"))[0]
+
+    # -----using slow but accurate name identifier-------
+    # names = get_topics(query, courseDataNames(courseData))
+    # for values in names:
+    #     print(values)
+    # #layer 1 best result key
+    # topName = (str(names[0]).split(":"))[0]
+    # topSheet = {}
+    # for i in courseData:
+    #     if i['Name'] == topName:
+    #         topSheet = i
+
+    # -----very fast but more prone to error at large inputs name identifier-------
+    model = SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2')
+    # Two lists of sentences
+    sentences1 = []
+    for i in courseDataNames(courseData):
+        sentences1.append(query)
+    sentences2 = courseDataNames(courseData)
+    #Compute embedding for both lists
+    embeddings1 = model.encode(sentences1, convert_to_tensor=True)
+    embeddings2 = model.encode(sentences2, convert_to_tensor=True)
+    #Compute cosine-similarities
+    cosine_scores = util.cos_sim(embeddings1, embeddings2)
+    #Offset the pairs with similarity score^2
+    scoreList = {}
+    iterable = 0
+    for value in courseDataNames(courseData):
+        score = (cosine_scores[iterable][iterable])
+        scoreList.update({value:score})
+        iterable += 1
+    
+    scoreList = dict(sorted(scoreList.items(), key=lambda x:x[1], reverse=True))
+    for key, value in scoreList.items():
+        print(str(key) + " : " + str(value))
+    
+    topName = tuple(scoreList.items())[0][0]
+    print(topName)
     topSheet = {}
     for i in courseData:
         if i['Name'] == topName:
@@ -171,6 +197,7 @@ def courseSearch(query):
     print("-------------------------------------------")
     return outputString
 
+#---------------Terminal interaction function--------
 def main():
     while True:
         print("Do you want to ask about specific courses or general content")
