@@ -105,4 +105,7 @@ if __name__ == "__main__":
     allJsons.update({'Academic Registry':makeSitemapJson('https://www.tcd.ie/academicregistry/sitemap/')})
     allJsons.update({'Study':makeSitemapJson('https://www.tcd.ie/study/sitemap/')})
 
+    allJsons.update({'Sport':makeSitemapJson('https://www.tcd.ie/Sport/sitemap/')})
+    
+
     saveToJSON(allJsons, '../DataFiles/AcademicRegData.json')
