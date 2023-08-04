@@ -49,8 +49,14 @@ def getDataJson(link):
                 #print(details)
         newList.update({escapeString(currentH3):escapeString(details)})
 
+        # remove blank content elements
         for i in list(newList.keys()):
             if newList[i] == '':
+                del newList[i]
+
+        # remove content with incorrect data
+        for i in list(newList.keys()):
+            if i == '' or i[0] == ' ':
                 del newList[i]
 
     return newList
@@ -74,6 +80,7 @@ if __name__ == '__main__':
     countryData = {}
     for name, link in countrys.items():
         countryPageData = getDataJson(link)
+        countryPageData.update({'Link':link})
         countryData.update({name:countryPageData})
         print(name)
 

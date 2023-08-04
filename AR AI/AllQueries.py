@@ -7,23 +7,14 @@ sys.path.insert(0, '..')
 from outputDataFunctions import *
 from transformers import pipeline
 
-#---------------Test data loader---------------------
-def loadTestData():
+#---------------Data loader--------------------------
+def loadData(fileName):
     try:
-        file = open('AcademicRegData.json', encoding="utf8")
+        file = open('fileName', encoding="utf8")
     except:
-        file = open('./DataFiles/AcademicRegData.json', encoding="utf8")
+        file = open('./DataFiles/' + fileName, encoding="utf8")
     generalData = json.load(file)
     return generalData
-
-#---------------Load course data---------------------
-def loadCourseData():
-    try:
-        file = open('courseData.json', encoding="utf8")
-    except:
-        file = open('./DataFiles/courseData.json', encoding="utf8")
-    courseData = json.load(file)
-    return courseData
 
 #---------------Label loader-------------------------
 def getSheetLabels(generalData):
@@ -123,11 +114,11 @@ def generalSearch(query):
     stop = timeit.default_timer()
     print("\n" + "Time taken: " + str(round((stop-start), 1)) + " seconds")
     print("-------------------------------------------")
-    return (str(highestSheetAnswer) + " : score : " + str(highestSheetVal))
+    return (str(highestSheetAnswer) + " : score : " + str(highestSheetVal)) 
 
 #---------------Course specific search---------------
 def courseSearch(query):
-    courseData = loadCourseData()
+    courseData = loadData('courseData.json')
     #-------------------------------Course------------------------------------------
     print("-------------------------------------------")
     start = timeit.default_timer()
@@ -197,22 +188,87 @@ def courseSearch(query):
     print("-------------------------------------------")
     return outputString
 
+#---------------Country Info search------------------
+def countrySearch(query):
+    countryData = loadData('CountryData.json')
+    print("-------------------------------------------")
+    start = timeit.default_timer()
+    print("----------------Names---------------------")
+
+    # -----very fast but more prone to error at large inputs name identifier-------
+    model = SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2')
+    # Two lists of sentences
+    sentences1 = []
+    for i in countryData:
+        sentences1.append(query)
+    sentences2 = list(countryData.keys())
+    #Compute embedding for both lists
+    embeddings1 = model.encode(sentences1, convert_to_tensor=True)
+    embeddings2 = model.encode(sentences2, convert_to_tensor=True)
+    #Compute cosine-similarities
+    cosine_scores = util.cos_sim(embeddings1, embeddings2)
+    #Offset the pairs with similarity score^2
+    scoreList = {}
+    iterable = 0
+    for value in countryData.keys():
+        score = (cosine_scores[iterable][iterable])
+        scoreList.update({value:score})
+        iterable += 1
+    
+    scoreList = dict(sorted(scoreList.items(), key=lambda x:x[1], reverse=True))
+    for key, value in scoreList.items():
+        print(str(key) + " : " + str(value))
+    
+    topName = tuple(scoreList.items())[0][0]
+    print(topName)
+    topSheet = {}
+    for key, val in countryData.items():
+        if key == topName:
+            topSheet = val
+
+    print("----------------Headings---------------------")
+    headings = get_topics(query, findHeaderList(topSheet))
+    for n in headings:
+        print(n)
+    TopHeading = (str(headings[0]).split(":"))[0]
+
+    outputString = ""
+    print("---------------Course output-------------")
+    for key, val in countryData.items():
+        if key == topName:
+            try:
+                outputString = (val[TopHeading]) + "\n"
+                outputString += ("Here is the Course page for " + topName + ": " + val['Link'])
+            except:
+                outputString = ("No " + TopHeading + " data found in file for " + topName) + "\n"
+                outputString += ("Here is the Course page for " + topName + ": " + val['Link'])
+            
+    stop = timeit.default_timer()
+    print("\n" + "Time taken: " + str(round((stop-start), 1)) + " seconds")
+    print("-------------------------------------------")
+    return outputString
+
 #---------------Terminal interaction function--------
 def main():
     while True:
-        print("Do you want to ask about specific courses or general content")
+        print("Do you want to ask about specific courses, specific countries or general information")
         queryFilter1 = input('>')
-        filter1 = get_topics(queryFilter1, ['General query', 'Course query'])
+        filter1 = get_topics(queryFilter1, ['General', 'Course', 'Country'])
         if (str(filter1[0]).split(":"))[0] == 'General query':
             print("-------------------------------------------")
             print("Ask a Query about general information (Example: 'Give me information about CAO Applications')")
             query = input('>')
             print(generalSearch(query))
-        else:
+        elif (str(filter1[0]).split(":"))[0] == 'Course query':
             print("-------------------------------------------")
-            print("Ask a Query about Courses (Example: 'what are the admission requirements for Economics?')")
+            print("Ask a Query about Courses (Example: 'What are the admission requirements for Economics?')")
             query = input('>')
             print(courseSearch(query))
+        else:
+            print("-------------------------------------------")
+            print("Ask a Query about Country requirements (Example: 'What are the Undergraduate requirements for Algeria?')")
+            query = input('>')
+            print(countrySearch(query))
 
 if __name__ == "__main__":
     main()
