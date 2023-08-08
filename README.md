@@ -23,16 +23,25 @@ This will run the best of both query asnwering functions together and will propt
 > **output:** ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/24ec5997-9dbe-4f62-8a6a-68a4f2c51847)
 > ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/46760c64-bd2d-4317-aafd-db62a9a38a24)
 > ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/72db878d-f602-4307-9d49-d329e85f5644)
-### Data Files:
-  The data files are simple json files that can be filled using the webscrapper files. The academic registry data files are currently beng used by the query answerer but more data will be added to it.
-> ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/be99a9ac-1a20-4d90-9af1-67fe8b8a9720)
 ### General Query example:
   This is the main quey handler that answers any type of question as long as the data is loaded in. The more data is loaded the less accurate it gets but thats to be expected due to the similraity of the data. The answers tend not to be wrong just less precise that needed. It links to the webpage to get around this since if its not in the page then it wont be anywhere either way.
 > **input:** "what financial support is available to me as a SUSI student?"
 >
 > **output:** ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/a8b19364-810f-4dab-a608-0477322e4d59)
 > ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/b76c09dc-c086-4e37-aa28-81731ec1d670)
+> ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/810e4cfc-7662-4520-a998-c9270767c360)
+
+### Country Query example:
+  This query handler is similar to the course search but answers questions based on countries and there requirements instead of courses.
+> **input** "What are the undergraduate requirements for Malta?"
 >
+> **output** ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/34210ea0-d217-4b7c-af40-714d1711e9f5)
+> ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/a45b3c1d-3167-4dbf-a2e4-f8a05247cd74)
+
+## Data Files:
+  The data files are simple json files that can be filled using the webscrapper files. The academic registry data files are currently beng used by the query answerer but more data will be added to it.
+> ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/be99a9ac-1a20-4d90-9af1-67fe8b8a9720)
+
 ## Scrappers
   Each scrapper does a different type of page on the tcd.ie website. Not all pages and page content works since they are werirdly formated. try them and double check the data is formated correctly. it tends not to get incorrect data but rather missing or poorly formated ones.
 ### Course Scrapper
@@ -43,3 +52,6 @@ This will run the best of both query asnwering functions together and will propt
 > **Website:** "https://www.tcd.ie/academicregistry/fees-and-payments/"
 > 
 > **Output:** ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/aba8ac2a-34da-48ff-969f-bc62eb643be0)
+### Country Scrapper
+  This scrapper is used to get all the country information and add it to the list. This is in a very similar format to the course scrapper but gets requirements for countries and there available resources to help apply.
+> ![image](https://github.com/WilliamWalshDowd/Academic-Registry-Query-Lookup/assets/99445178/f20bf6c1-2923-4b3a-9547-1cc8023ce535)
