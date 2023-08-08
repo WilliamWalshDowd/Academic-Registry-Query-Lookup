@@ -39,10 +39,6 @@ def getQAOutput(nlp, question, context):
 def get_topics(input, labels):
     classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
 
-    # make all lower case
-    for i, label in enumerate(labels):
-        labels[i] == label.lower()
-
     output = classifier(input, labels)
 
     formatedOutput = []
@@ -264,12 +260,13 @@ def main():
         print("Do you want to ask about specific courses, specific countries or general information")
         queryFilter1 = input('>')
         filter1 = get_topics(queryFilter1, ['General', 'Course', 'Country'])
-        if (str(filter1[0]).split(":"))[0] == 'General query':
+        #print(filter1)
+        if (str(filter1[0]).split(":"))[0] == 'General':
             print("-------------------------------------------")
             print("Ask a Query about general information (Example: 'Give me information about CAO Applications')")
             query = input('>')
             print(generalSearch(query))
-        elif (str(filter1[0]).split(":"))[0] == 'Course query':
+        elif (str(filter1[0]).split(":"))[0] == 'Course':
             print("-------------------------------------------")
             print("Ask a Query about Courses (Example: 'What are the admission requirements for Economics?')")
             query = input('>')
