@@ -38,7 +38,13 @@ def getQAOutput(nlp, question, context):
 #---------------Name Identifier----------------------
 def get_topics(input, labels):
     classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+
+    # make all lower case
+    for i, label in enumerate(labels):
+        labels[i] == label.lower()
+
     output = classifier(input, labels)
+
     formatedOutput = []
     for i in range(len(labels)):
         formatedOutput.append(output['labels'][i] + ': ' + str(round(output['scores'][i]*100, 3)) + "%")
@@ -136,12 +142,13 @@ def courseSearch(query):
     #         topSheet = i
 
     # -----very fast but more prone to error at large inputs name identifier-------
-    model = SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2')
+    model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
     # Two lists of sentences
     sentences1 = []
+    sentences2 = []
     for i in courseDataNames(courseData):
         sentences1.append(query)
-    sentences2 = courseDataNames(courseData)
+        sentences2.append(i.lower)
     #Compute embedding for both lists
     embeddings1 = model.encode(sentences1, convert_to_tensor=True)
     embeddings2 = model.encode(sentences2, convert_to_tensor=True)
@@ -196,12 +203,15 @@ def countrySearch(query):
     print("----------------Names---------------------")
 
     # -----very fast but more prone to error at large inputs name identifier-------
-    model = SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2')
+    model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
     # Two lists of sentences
     sentences1 = []
-    for i in countryData:
-        sentences1.append(query)
-    sentences2 = list(countryData.keys())
+    sentences2 = []
+    for i in countryData.keys():
+        sentences1.append(query.lower())
+        sentences2.append(i.lower())
+        #print(i.lower())
+
     #Compute embedding for both lists
     embeddings1 = model.encode(sentences1, convert_to_tensor=True)
     embeddings2 = model.encode(sentences2, convert_to_tensor=True)
