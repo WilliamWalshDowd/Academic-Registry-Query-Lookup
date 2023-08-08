@@ -210,7 +210,7 @@ def countrySearch(query):
     for i in countryData.keys():
         sentences1.append(query.lower())
         sentences2.append(i.lower())
-        print(i.lower())
+        #print(i.lower())
 
     #Compute embedding for both lists
     embeddings1 = model.encode(sentences1, convert_to_tensor=True)
