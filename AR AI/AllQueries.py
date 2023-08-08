@@ -60,7 +60,7 @@ def courseDataNames(data):
 
 #---------------General query search-----------------
 def generalSearch(query):
-    generalData = loadTestData()
+    generalData = loadData('AcademicRegData.json')
     justSheets = getSheetLabels(generalData)
     #-------------------------------General-----------------------------------------
     printDataTitle(generalData)
