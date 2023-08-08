@@ -18,23 +18,25 @@ def getDataJson(link):
 
     newList = {}
     
-    step4 = soup.find_all('div', class_ = "lay-centered width-max")
-    step4 = step4[6]
+    step4 = soup.find_all("div", "lay-centered width-max")
     if step4 != None:
+        #print(step4)
+        step4 = step4[6]
         #print("found div-------------------------------------------------------------")
         details = ""
         currentH3 = ""
         headerlist = []
         for i in step4.find_all('h2'):
             headerlist.append(i.getText())
-        for idx,n in enumerate(step4.find_all()):
-            if ('<h2>' in str(n)):
+        for idx, n in enumerate(step4.find_all()):
+            if ('<h2>' in str(n) and (len(str(n))) <= 40):
+                #print('{' + str(n) + '} \n\n')
                 if currentH3 != "":
                     newList.update({escapeString(currentH3):escapeString(details)})
                     details = ""
                 #print("     " + str(n))
                 currentH3 = n.getText()
-            elif ('<p>' in str(n) or '<span>' in str(n) or '<h3>' in str(n) or '</a>' in str(n) or '<li>' in str(n))and(idx != 0):
+            elif ('<p>' in str(n) or '<span>' in str(n) or '<h3>' in str(n) or '</a>' in str(n) or '<li>' in str(n) or '<strong>' in str(n))and(idx != 0):
                 #print("     " + n.getText())
                 if (details != "") and (n.getText() != details):
                     if ('</a>' in str(n)) and ('<p>' not in str(n)):
@@ -74,15 +76,15 @@ if __name__ == '__main__':
     sheet = soup.find_all('ul', class_ = "list-links")
     for sublist in sheet:
         for link in sublist.find_all('a', href=True):
-            print(link.getText() + ' https://www.tcd.ie/study/country/' + link['href'])
+            print(link.getText() + ' -> https://www.tcd.ie/study/country/' + link['href'])
             countrys.update({link.getText():'https://www.tcd.ie/study/country/' + link['href']})
     
     countryData = {}
     for name, link in countrys.items():
+        print('Scrapping ' + name + '...')
         countryPageData = getDataJson(link)
         countryPageData.update({'Link':link})
         countryData.update({name:countryPageData})
-        print(name)
 
 
     saveToJSON(countryData, '../DataFiles/CountryData.json') # saves list to json file (address of file is not set properly so change to your required path)
