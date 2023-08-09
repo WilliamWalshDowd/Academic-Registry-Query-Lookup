@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot Test</title>
+    <link rel = "stylesheet" type="text/css" href="style.css">
+    <script>
+        window.console = window.console || function(t) {};
+    </script>
+</head>
+<body>
+    <header>
+        <img src="https://www.tcd.ie/media/tcd/site-assets/images/tcd-logo.png" alt="logo">
+    </header>
+    <button type="button" class="collapsible">How to use</button>
+    <div class="content">
+        <p>Lorem ipsum...</p>
+    </div>
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight){
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+
+    <H1 class="Title">Query Search</H1>
+
+    <div id="container" class="container">
+        <div id="chat" class="chat">
+            <div id="messages" class="messages">
+                <div id="bot" class="bot response"><span>Do you want to ask about specific courses, specific countries or general information?</span></div>
+            </div>
+            <input id="input" type="text" placeholder="Write something..." autocomplete="off" autofocus="true" />
+        </div>
+        <script src="script.js"></script>
+        <script id="rendered-js"></script>
+    </div>
+</body>
+</html>
