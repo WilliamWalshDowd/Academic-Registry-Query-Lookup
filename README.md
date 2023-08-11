@@ -124,7 +124,10 @@ This will run the best of both query asnwering functions together and will propt
 }
 ```
 ## Website Running
-  The website is not functional as it needs a backend which will be set up later. It can be run to see what it looks like but its not possible to answer questions. All the functions are set up just not plugged in. To run the website localy you can use this comand:
+  The website is not functional as it needs a backend which will be set up later. It can be run to see what it looks like but its not possible to answer questions. All the functions are set up just not plugged in.
+> you can just open the index.html file in your browser since its not functional beyond visualy.
+
+  To run the website localy you can use this comand:
 > python -m http.server 4000
 > 
   Then go to http://localhost:4000/ to see the webpage.
