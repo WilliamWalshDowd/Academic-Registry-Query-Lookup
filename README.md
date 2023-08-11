@@ -75,7 +75,7 @@ This will run the best of both query asnwering functions together and will propt
         "Link": "https://www.tcd.ie/courses/undergraduate/courses/drama-studies-jh/"
 }
 ```
-### Content Scrapper (ScrappyMcScrape)
+### Content Scrapper
   This scrapper is designed to scrape the general query pages on the tcd.ie website. It isn't perfect since each page is alittle different but it will get the magority of the content for each page while formating it and labeling it. the example of a page and its output is below.
 > **Website:** "https://www.tcd.ie/academicregistry/fees-and-payments/"
 > 
