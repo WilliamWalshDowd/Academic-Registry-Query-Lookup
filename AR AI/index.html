@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Chatbot Test</title>
     <link rel = "stylesheet" type="text/css" href="style.css">
     <script>
         window.console = window.console || function(t) {};
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header>
@@ -46,11 +48,11 @@
     <div id="container" class="container">
         <div id="chat" class="chat">
             <div id="messages" class="messages">
-                <div id="bot" class="bot response"><span>Do you want to ask about specific courses, specific countries or general information?</span></div>
+                <div id="bot" class="bot response"><span>Do you want to ask about specific courses, specific countries or general website information?</span></div>
             </div>
             <input id="input" type="text" placeholder="Write something..." autocomplete="off" autofocus="true" />
         </div>
-        <script src="script.js"></script>
+        <script type="module" src="./script.js"></script>
         <script id="rendered-js"></script>
     </div>
 </body>
