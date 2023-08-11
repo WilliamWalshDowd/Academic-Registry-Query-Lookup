@@ -8,18 +8,9 @@ inputField.addEventListener("keydown", (e) => {
 });
 
 function output(input) {
-    let product;
-    product = 'test';
-    var output;
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "AllQueries.py?text=" + text, true);
-    xhr.responseType = "JSON";
-    xhr.onload = function(e) {
-        var arrOfStrings = JSON.parse(xhr.response);
-    }
-    xhr.send();
+    let output = 'test';
 
-    addChatEntry(input, JSON.stringify(output));
+    addChatEntry(input, output);
 }
 
 function addChatEntry(input, product) {

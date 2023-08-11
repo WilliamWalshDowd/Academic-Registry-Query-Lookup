@@ -183,4 +183,4 @@ if __name__ == "__main__":
 
     print(str(len(coursePageList)) + " / " + str(len(linkList)))
 
-    saveToJSON(coursePageList, "../DataFiles/courseData.json")
+    #saveToJSON(coursePageList, "../DataFiles/courseData.json")
