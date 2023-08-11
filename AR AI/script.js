@@ -10,26 +10,16 @@ inputField.addEventListener("keydown", (e) => {
 function output(input) {
     let product;
     product = 'test';
-    addChatEntry(input, product);
-}
-
-function compare(utterancesArray, answersArray, string) {
-    let reply;
-    let replyFound = false;
-    for (let x = 0; x < utterancesArray.length; x++) {
-        for (let y = 0; y < utterancesArray[x].length; y++) {
-        if (utterancesArray[x][y] === string) {
-            let replies = answersArray[x];
-            reply = replies[Math.floor(Math.random() * replies.length)];
-            replyFound = true;
-            break;
-        }
-        }
-        if (replyFound) {
-        break;
-        }
+    var output;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "AllQueries.py?text=" + text, true);
+    xhr.responseType = "JSON";
+    xhr.onload = function(e) {
+        var arrOfStrings = JSON.parse(xhr.response);
     }
-    return reply;
+    xhr.send();
+
+    addChatEntry(input, JSON.stringify(output));
 }
 
 function addChatEntry(input, product) {
